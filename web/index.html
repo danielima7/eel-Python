@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Exemplo de estrutura de eel</h1>
+    <h2>O usuáriro digita 2 valores, os v alores são passados para python, por meio de uma função de javascript.</h2>
+    <h2>Por sua vez, a função python faz o que precisa fazer com os dados no back-end - nesse caso irá somar os valores - e retorna para o frot-end, por meio de uma função javascript</h2>
+
+    <input type="text" id="valorA" placeholder="Valor A">
+    <input type="text" id="valorB" placeholder="Valor B">
+    <button type="submit" onclick="mandarValoresPython()">Calcular</button>
+
+    <div id="resposta">
+
+    </div>
+
+    <script type="text/javascript" src="/eel.js"></script> <!-- Sempre deve exporta esse script. Não precisa criar nada -->
+    <script>
+        function mandarValoresPython() {
+            let A = document.getElementById('valorA').value;
+            let B = document.getElementById('valorB').value;
+
+            eel.somarNumero(A, B); // Essa linha é responsável por mandar os valores para a função em python 
+        }
+
+        eel.expose(printarResultados) // Faz a função printarResultado ficar visível para python
+        function printarResultados(soma) {
+            const divResposta =document.querySelector('#resposta')
+
+            divResposta.textContent = `Soma = ${soma}`
+        }
+    </script>
+</body>
+</html>
